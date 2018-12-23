@@ -9,17 +9,16 @@
 
 import DataType from 'sequelize';
 import Model from '../sequelize';
+import Player from './Player.js';
+import Game from './Game.js';
 
-const UserLogin = Model.define('UserLogin', {
-  name: {
-    type: DataType.STRING(50),
-    primaryKey: true,
-  },
-
-  key: {
-    type: DataType.STRING(100),
-    primaryKey: true,
+const GamePlayers = Model.define('GamePlayers', {
+  isDurok: {
+    type: DataType.BOOLEAN,
   },
 });
 
-export default UserLogin;
+Player.belongsToMany(Game, { through: GamePlayers});
+Game.belongsToMany(Player, { through: GamePlayers});
+
+export default GamePlayers;

@@ -10,14 +10,23 @@
 import DataType from 'sequelize';
 import Model from '../sequelize';
 
-const UserClaim = Model.define('UserClaim', {
-  type: {
-    type: DataType.STRING,
-  },
+const Player = Model.define(
+  'Player',
+  {
+    id: {
+      type: DataType.UUID,
+      defaultValue: DataType.UUIDV1,
+      primaryKey: true,
+    },
 
-  value: {
-    type: DataType.STRING,
-  },
-});
+    name: {
+      type: DataType.STRING(255),
+    },
 
-export default UserClaim;
+  },
+  {
+    indexes: [{ fields: ['name'] }],
+  },
+);
+
+export default Player;
