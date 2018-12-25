@@ -11,9 +11,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './NewGame.css';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Col, Grid, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 import Players from '../../components/Players';
-import Games from '../../components/Games';
 import Link from '../../components/Link';
 
 class NewGame extends React.Component {
@@ -27,21 +26,38 @@ class NewGame extends React.Component {
     ).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.state = {
+      players: {
+        'Anna': false,
+        'Charlie': false,
+      },
+    };
+  }
+
+  handleOnClick(name) {
+    let players = this.state.players
+    players[name] = !players[name];
+    this.setState( {players} );
+  }
+
+
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Link><Button>Start new game</Button></Link>
-          <br/>
-          <br/>
-          <Panel bsStyle="primary">
-            <Panel.Heading><h4>Standings</h4></Panel.Heading>
-            <Players />
-          </Panel>
-          <Panel bsStyle="primary">
-            <Panel.Heading><h4>Current Games</h4></Panel.Heading>
-            <Games />
-          </Panel>
+          Players
+          <ListGroup>
+            { Object.entries(this.state.players).map( e => {
+              let [name, active] = e;
+              return (
+                <ListGroupItem key={name} active={active} onClick={ (e) => {
+                  this.handleOnClick(name);} }>{name}</ListGroupItem>
+              );})
+            }
+          </ListGroup>
         </div>
       </div>
     );
