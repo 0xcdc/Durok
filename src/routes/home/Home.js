@@ -11,8 +11,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
-import { Panel } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 import Players from '../../components/Players';
+import Games from '../../components/Games';
+import Link from '../../components/Link';
 
 class Home extends React.Component {
   static propTypes = {
@@ -29,9 +31,16 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
+          <Link><Button>Start new game</Button></Link>
+          <br/>
+          <br/>
           <Panel bsStyle="primary">
             <Panel.Heading><h4>Standings</h4></Panel.Heading>
             <Players />
+          </Panel>
+          <Panel bsStyle="primary">
+            <Panel.Heading><h4>Current Games</h4></Panel.Heading>
+            <Games />
           </Panel>
         </div>
       </div>
