@@ -19,7 +19,10 @@ const routes = {
       path: '',
       load: () => import(/* webpackChunkName: 'home' */ './home'),
     },
-    // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
+    {
+      path: '/newgame',
+      load: () => import(/* webpackChunkName: 'newgame' */ './newgame'),
+    },    // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',
       load: () => import(/* webpackChunkName: 'not-found' */ './not-found'),

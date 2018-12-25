@@ -10,13 +10,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
+import s from './NewGame.css';
 import { Button, Panel } from 'react-bootstrap';
 import Players from '../../components/Players';
 import Games from '../../components/Games';
 import Link from '../../components/Link';
 
-class Home extends React.Component {
+class NewGame extends React.Component {
   static propTypes = {
     news: PropTypes.arrayOf(
       PropTypes.shape({
@@ -31,7 +31,7 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Link to='/newgame'><Button>Start new game</Button></Link>
+          <Link><Button>Start new game</Button></Link>
           <br/>
           <br/>
           <Panel bsStyle="primary">
@@ -48,4 +48,4 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(s)(Home);
+export default withStyles(s)(NewGame);
