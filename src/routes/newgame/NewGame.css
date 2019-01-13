@@ -47,3 +47,12 @@
     max-width: 100%;
   }
 }
+
+.searchBar {
+  border: 3px solid;
+  width: 100%;
+  padding: 10px 12px;
+  outline: none;
+  margin: 0 auto 10px;
+  text-align: center;
+}

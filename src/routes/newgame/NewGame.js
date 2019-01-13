@@ -17,11 +17,9 @@ import Link from '../../components/Link';
 
 class NewGame extends React.Component {
   static propTypes = {
-    news: PropTypes.arrayOf(
+    players: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        content: PropTypes.string,
+        name: PropTypes.string.isRequired,
       }),
     ).isRequired,
   };
@@ -30,16 +28,22 @@ class NewGame extends React.Component {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.state = {
-      players: {
-        'Anna': false,
-        'Charlie': false,
-      },
+      players:
+        this.props.players.map( p => {
+          p.selected = false;
+          return p;
+        }),
+      filter: "",
     };
-  }
+ }
 
   handleOnClick(name) {
-    let players = this.state.players
-    players[name] = !players[name];
+    let players = this.state.players.map( p => {
+      if(p.name == name) {
+        p.selected ^= true;
+      }
+      return p;
+    });
     this.setState( {players} );
   }
 
@@ -48,13 +52,23 @@ class NewGame extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          Players
+          <input
+              ref="clientFilterText"
+              className={s.searchBar}
+              type="text"
+              onChange={this.handleSeachBoxChange}
+              autoFocus
+              onKeyDown={this.handleOnKeyDown}
+              placeholder="Enter any part of the players name to filter"/>
           <ListGroup>
-            { Object.entries(this.state.players).map( e => {
-              let [name, active] = e;
+            { this.state.players.map( p => {
               return (
-                <ListGroupItem key={name} active={active} onClick={ (e) => {
-                  this.handleOnClick(name);} }>{name}</ListGroupItem>
+                <ListGroupItem
+                  key={p.name}
+                  active={p.selected}
+                  onClick={(e) => {this.handleOnClick(p.name)}}>
+                  {p.name}
+                </ListGroupItem>
               );})
             }
           </ListGroup>

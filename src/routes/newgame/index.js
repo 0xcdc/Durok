@@ -17,14 +17,19 @@ async function action({ fetch }) {
       query: '{news{title,link,content}}',
     }),
   });
-  const { data } = await resp.json();
+  let { data } = await resp.json();
   if (!data || !data.news) throw new Error('Failed to load the news feed.');
+  data = [
+    { name: "Charlie"},
+    { name: "Anna"},
+  ];
+
   return {
     title: 'Durok',
     chunks: ['newgame'],
     component: (
       <Layout>
-        <NewGame news={data.news} />
+        <NewGame players={data} />
       </Layout>
     ),
   };
