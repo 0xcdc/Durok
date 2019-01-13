@@ -12,16 +12,21 @@ import NewGame from './NewGame';
 import Layout from '../../components/Layout';
 
 async function action({ fetch }) {
-  const resp = await fetch('/graphql', {
+/*  const resp = await fetch('/graphql', {
     body: JSON.stringify({
       query: '{news{title,link,content}}',
     }),
   });
   let { data } = await resp.json();
   if (!data || !data.news) throw new Error('Failed to load the news feed.');
-  data = [
-    { name: "Charlie"},
-    { name: "Anna"},
+  */
+  const data = [
+    { name: "Charlie" },
+    { name: "Anna" },
+    { name: "Todd" },
+    { name: "Santtu" },
+    { name: "David" },
+    { name: "Seda" },
   ];
 
   return {
